@@ -1,3 +1,4 @@
+import entity.mob.Player;
 import graphics.Screen;
 import input.Keyboard;
 import java.awt.Canvas;
@@ -30,6 +31,8 @@ public class Game extends Canvas implements Runnable {
     private Keyboard key = new Keyboard();
     @SuppressWarnings("FieldMayBeFinal")
     private Level level;
+    @SuppressWarnings("FieldMayBeFinal")
+    private Player player;
     private boolean running = false;
     
     @SuppressWarnings("FieldMayBeFinal")
@@ -48,6 +51,7 @@ public class Game extends Canvas implements Runnable {
         frame = new JFrame();
         key = new Keyboard();
         level = new RandomLevel(64, 64);
+        player = new Player(key);
 
         addKeyListener(key);
 
@@ -113,16 +117,11 @@ public class Game extends Canvas implements Runnable {
 
     }
 
-    int x=0, y=0;
-
     public void update() {
         
         key.update();
+        player.update();
 
-        if (key.up) y--;
-        if (key.down) y++;
-        if (key.left) x--;
-        if (key.right) x++;
     }
 
 
@@ -137,7 +136,7 @@ public class Game extends Canvas implements Runnable {
 
         screen.clear();
         //screen.render(x,y);
-        level.render(x, y, screen);
+        level.render(player.x, player.y, screen);
 
         System.arraycopy(screen.pixels, 0, pixels, 0, pixels.length);
 
