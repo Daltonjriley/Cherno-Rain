@@ -8,7 +8,6 @@ import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import javax.swing.JFrame;
 import level.Level;
-import level.SpawnLevel;
 
 public class Game extends Canvas implements Runnable {
     private static final long serialVersionUID = 1L;
@@ -50,7 +49,7 @@ public class Game extends Canvas implements Runnable {
         screen = new Screen(width, height);
         frame = new JFrame();
         key = new Keyboard();
-        level = new SpawnLevel("/textures/levels/level.png");
+        level = Level.spawn;
         player = new Player(30, 30, key);
 
         addKeyListener(key);
