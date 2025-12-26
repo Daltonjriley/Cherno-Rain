@@ -1,17 +1,20 @@
 package graphics;
 
 import java.util.Random;
+import level.tile.Tile;
 
 public class Screen {
 
     @SuppressWarnings("FieldMayBeFinal")
-    private int width;
+    public int width;
     @SuppressWarnings("FieldMayBeFinal")
-    private int height;
+    public int height;
     public int[] pixels;
     public final int MAP_SIZE = 64;
     public final int MAP_SIZE_MASK = MAP_SIZE - 1;
     public int[] tiles = new int[MAP_SIZE * MAP_SIZE];
+
+    public int xOffset, yOffset;
 
     @SuppressWarnings("FieldMayBeFinal")
     private Random random = new Random();
@@ -35,20 +38,24 @@ public class Screen {
         }
     }
 
-    public void render(int xOffset, int yOffset) {
+    public void renderTile(int xp, int yp, Tile tile) {
 
-        for (int y = 0; y < height; y++) {
-            int yp = y + yOffset;
-            if (yp < 0 || yp >= height) continue;
-            for (int x = 0; x < width; x++) {
-                int xp = x + xOffset;
-                if (xp < 0 || xp >= width) continue;
-
-                pixels[(xp + (yp * width))] = Sprite.grass.pixels[(xp & 15) + (yp & 15) * Sprite.grass.SIZE];
+        xp -= xOffset;
+        yp -= yOffset;
+        for (int y = 0; y < tile.sprite.SIZE; y++){
+            int ya = y + yp;
+            for (int x = 0; x < tile.sprite.SIZE; x++){
+                int xa = x + xp;
+                if (xa < -tile.sprite.SIZE || xa >= width || ya < 0 || ya >= height) break;
+                if (xa < 0) xa = 0;
+                pixels[xa + ya * width] = tile.sprite.pixels[x + y * tile.sprite.SIZE];
             }
         }
-
     }
 
+    public void setOffset(int xOffset, int yOffset) {
 
+        this.xOffset = xOffset;
+        this.yOffset = yOffset;
+    }
 }

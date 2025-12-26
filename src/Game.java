@@ -6,6 +6,8 @@ import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import javax.swing.JFrame;
+import level.Level;
+import level.RandomLevel;
 
 public class Game extends Canvas implements Runnable {
     private static final long serialVersionUID = 1L;
@@ -16,13 +18,7 @@ public class Game extends Canvas implements Runnable {
 
     private Thread thread;
     private JFrame frame;
-    private Keyboard key = new Keyboard();
-
-    @SuppressWarnings("FieldMayBeFinal")
-    private BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
-    @SuppressWarnings("FieldMayBeFinal")
-    private int[] pixels = ((java.awt.image.DataBufferInt) image.getRaster().getDataBuffer()).getData();
-
+    
     public JFrame getFrame() {
         return frame;
     }
@@ -31,10 +27,17 @@ public class Game extends Canvas implements Runnable {
         this.frame = frame;
     }
 
+    private Keyboard key = new Keyboard();
+    @SuppressWarnings("FieldMayBeFinal")
+    private Level level;
     private boolean running = false;
-
+    
     @SuppressWarnings("FieldMayBeFinal")
     private Screen screen;
+    @SuppressWarnings("FieldMayBeFinal")
+    private BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
+    @SuppressWarnings("FieldMayBeFinal")
+    private int[] pixels = ((java.awt.image.DataBufferInt) image.getRaster().getDataBuffer()).getData();
 
     public Game() {
 
@@ -44,6 +47,8 @@ public class Game extends Canvas implements Runnable {
         screen = new Screen(width, height);
         frame = new JFrame();
         key = new Keyboard();
+        level = new RandomLevel(64, 64);
+
         addKeyListener(key);
 
     }
@@ -131,8 +136,8 @@ public class Game extends Canvas implements Runnable {
         }
 
         screen.clear();
-
-        screen.render(x, y);
+        //screen.render(x,y);
+        level.render(x, y, screen);
 
         System.arraycopy(screen.pixels, 0, pixels, 0, pixels.length);
 
@@ -140,6 +145,21 @@ public class Game extends Canvas implements Runnable {
         g.drawImage(image, 0, 0, getWidth(), getHeight(), null);
         g.dispose();
         bs.show();
+
+    }
+
+        public static void main(String[] args) {
+        
+        Game game = new Game();
+        game.getFrame().setResizable(false);
+        game.getFrame().setTitle("Rain");
+        game.getFrame().add(game);
+        game.getFrame().pack();
+        game.getFrame().setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        game.getFrame().setLocationRelativeTo(null);
+        game.getFrame().setVisible(true);
+
+        game.start();
 
     }
 
