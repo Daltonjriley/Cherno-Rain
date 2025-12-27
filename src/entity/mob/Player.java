@@ -1,5 +1,6 @@
 package entity.mob;
 
+import entity.projectile.Projectile;
 import graphics.Screen;
 import graphics.Sprite;
 import input.Keyboard;
@@ -47,7 +48,16 @@ public class Player extends Mob {
             walking = false;
         }
 
+        clear();
         updateShooting();
+    }
+
+    private void clear() {
+
+        for (int i = 0; i < projectiles.size(); i++) {
+            Projectile p = projectiles.get(i);
+            if (p.isRemoved()) projectiles.remove(i);
+        }
     }
 
     public void updateShooting() {
