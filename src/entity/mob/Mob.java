@@ -31,6 +31,8 @@ public abstract class Mob extends Entity{
     @Override
     public void update() {}
 
+    protected void shoot(int x, int y, double dir) {}
+
     private boolean collision(int xa, int ya) {
 
         boolean solid = false;

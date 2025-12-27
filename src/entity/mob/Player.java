@@ -3,6 +3,7 @@ package entity.mob;
 import graphics.Screen;
 import graphics.Sprite;
 import input.Keyboard;
+import input.Mouse;
 
 public class Player extends Mob {
 
@@ -44,6 +45,18 @@ public class Player extends Mob {
             walking = true;
         } else {
             walking = false;
+        }
+
+        updateShooting();
+    }
+
+    public void updateShooting() {
+
+        if (Mouse.getB() == 1) {
+            double dx = Mouse.getX() - (300 * 3) / 2;
+            double dy = Mouse.getY() - (168 * 3) / 2;
+            double dir = Math.atan2(dy, dx);
+            shoot(x, y, dir);
         }
     }
 

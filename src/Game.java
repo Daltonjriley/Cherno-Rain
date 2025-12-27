@@ -14,9 +14,12 @@ import level.TileCoordinate;
 public class Game extends Canvas implements Runnable {
     private static final long serialVersionUID = 1L;
 
-    public static int width = 300;
-    public static int height = 168;
-    public static int scale = 3;
+    @SuppressWarnings("FieldMayBeFinal")
+    private static  int width = 300;
+    @SuppressWarnings("FieldMayBeFinal")
+    private static  int height = 168;
+    @SuppressWarnings("FieldMayBeFinal")
+    private static  int scale = 3;
 
     private Thread thread;
     private JFrame frame;
@@ -62,6 +65,14 @@ public class Game extends Canvas implements Runnable {
         addMouseListener(mouse);
         addMouseMotionListener(mouse);
 
+    }
+
+    public static int getWindowWidth() {
+        return width * scale;
+    }   
+
+    public static int getWindowHeight() {
+        return height * scale;
     }
 
     public synchronized void start() {
