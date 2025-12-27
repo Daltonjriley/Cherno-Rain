@@ -8,6 +8,7 @@ import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import javax.swing.JFrame;
 import level.Level;
+import level.TileCoordinate;
 
 public class Game extends Canvas implements Runnable {
     private static final long serialVersionUID = 1L;
@@ -50,9 +51,15 @@ public class Game extends Canvas implements Runnable {
         frame = new JFrame();
         key = new Keyboard();
         level = Level.spawn;
-        player = new Player(30, 30, key);
+        TileCoordinate playerSpawn = new TileCoordinate(19, 62);
+        player = new Player(playerSpawn.getX(), playerSpawn.getY(), key);
+        player.init(level);
 
         addKeyListener(key);
+
+        Mouse mouse = new Mouse();
+        addMouseListener(mouse);
+        addMouseMotionListener(mouse);
 
     }
 
