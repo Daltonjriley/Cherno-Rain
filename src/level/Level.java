@@ -1,6 +1,9 @@
 package level;
 
+import entity.Entity;
 import graphics.Screen;
+import java.util.ArrayList;
+import java.util.List;
 import level.tile.Tile;
 
 public class Level {
@@ -9,6 +12,8 @@ public class Level {
     protected  int[] tilesInt;
     protected int[] tiles;
     public static Level spawn = new SpawnLevel("/levels/spawn.png");
+
+    private List<Entity> entities = new ArrayList<>();
 
     @SuppressWarnings("OverridableMethodCallInConstructor")
     public Level(int width, int height) {
@@ -30,7 +35,12 @@ public class Level {
 
     protected void loadLevel(String path) {}
 
-    public void update() {}
+    public void update() {
+
+        for (int i = 0; i < entities.size(); i++) {
+            entities.get(i).update();
+        }
+    }
 
     //private void time() {}
 
@@ -49,8 +59,16 @@ public class Level {
            
             }
         }
+
+        for (int i = 0; i < entities.size(); i++) {
+            entities.get(i).render(screen);
+        }
     }
 
+    public void add(Entity e) {
+        
+        entities.add(e);
+    }
     public Tile getTile(int x, int y) {
 
         if (x < 0 || y < 0 || x >= width || y >= height) return Tile.voidTile;
