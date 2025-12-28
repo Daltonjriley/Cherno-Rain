@@ -4,16 +4,12 @@ import entity.Entity;
 import entity.projectile.Projectile;
 import entity.projectile.WizardProjectile;
 import graphics.Sprite;
-import java.util.ArrayList;
-import java.util.List;
 
 public abstract class Mob extends Entity{
 
     protected Sprite sprite;
     protected int dir = 0;
     protected boolean moving = false;
-
-    protected List<Projectile> projectiles = new ArrayList<>();
 
     public void move(int xa, int ya) {
 
@@ -39,9 +35,8 @@ public abstract class Mob extends Entity{
 
     protected void shoot(int x, int y, double dir) {
 
-        Projectile p = new WizardProjectile(x, y, dir);
-        projectiles.add(p);
-        level.add(p);
+        Projectile p = new WizardProjectile(x, y, dir); 
+        level.addProjectile(p);
     }
 
     private boolean collision(int xa, int ya) {

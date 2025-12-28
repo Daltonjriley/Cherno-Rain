@@ -2,6 +2,7 @@ package entity.projectile;
 
 import entity.Entity;
 import graphics.Sprite;
+import java.util.Random;
 
 public abstract class Projectile extends Entity {
 
@@ -12,6 +13,8 @@ public abstract class Projectile extends Entity {
     protected double nx, ny;
     protected double distance = 0;
     protected double speed, fireRate, range, damage;
+    
+    protected final Random random = new Random();
     
     public Projectile(int x, int y, double dir) {
 

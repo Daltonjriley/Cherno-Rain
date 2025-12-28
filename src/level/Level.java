@@ -1,6 +1,7 @@
 package level;
 
 import entity.Entity;
+import entity.projectile.Projectile;
 import graphics.Screen;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,7 +14,10 @@ public class Level {
     protected int[] tiles;
     public static Level spawn = new SpawnLevel("/levels/spawn.png");
 
+    @SuppressWarnings("FieldMayBeFinal")
     private List<Entity> entities = new ArrayList<>();
+    @SuppressWarnings("FieldMayBeFinal")
+    private List<Projectile> projectiles = new ArrayList<>();
 
     @SuppressWarnings("OverridableMethodCallInConstructor")
     public Level(int width, int height) {
@@ -40,6 +44,10 @@ public class Level {
         for (int i = 0; i < entities.size(); i++) {
             entities.get(i).update();
         }
+
+        for (int i = 0; i < projectiles.size(); i++) {
+            projectiles.get(i).update();
+        }
     }
 
     //private void time() {}
@@ -63,12 +71,22 @@ public class Level {
         for (int i = 0; i < entities.size(); i++) {
             entities.get(i).render(screen);
         }
+
+        for (int i = 0; i < projectiles.size(); i++) {
+            projectiles.get(i).render(screen);
+        }
     }
 
     public void add(Entity e) {
         
         entities.add(e);
     }
+
+    public void addProjectile(Projectile p) {
+
+        projectiles.add(p);
+    }
+
     public Tile getTile(int x, int y) {
 
         if (x < 0 || y < 0 || x >= width || y >= height) return Tile.voidTile;
@@ -80,6 +98,10 @@ public class Level {
 		if (tiles[x + y * width] == Tile.col_spawn_wall2) return Tile.spawn_wall2;
 		if (tiles[x + y * width] == Tile.col_spawn_water) return Tile.spawn_water;
         return Tile.voidTile;
+    }
+
+    public List<Projectile> getProjectiles() {
+        return projectiles;
     }
     
 }
