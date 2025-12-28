@@ -4,13 +4,14 @@ import graphics.Screen;
 import graphics.Sprite;
 
 public class WizardProjectile extends Projectile {
+
+    public static final int FIRE_RATE = 15;
     
     public WizardProjectile(int x, int y, double dir) {
 
         super(x, y, dir);
         range = random.nextInt(100) + 150;
         damage = 20;
-        fireRate = 10;
         speed = 3;
         sprite = Sprite.wizard_projectile;
         nx = speed * Math.cos(angle);

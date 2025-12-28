@@ -12,8 +12,8 @@ public abstract class Projectile extends Entity {
     protected double x, y;
     protected double nx, ny;
     protected double distance = 0;
-    protected double speed, fireRate, range, damage;
-    
+    protected double speed, range, damage;
+
     protected final Random random = new Random();
     
     public Projectile(int x, int y, double dir) {

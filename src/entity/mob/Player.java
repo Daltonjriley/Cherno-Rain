@@ -1,6 +1,7 @@
 package entity.mob;
 
 import entity.projectile.Projectile;
+import entity.projectile.WizardProjectile;
 import graphics.Screen;
 import graphics.Sprite;
 import input.Keyboard;
@@ -13,6 +14,9 @@ public class Player extends Mob {
     private Sprite sprite;
     private int anim = 0;
     private boolean walking = false;
+
+    
+    private int fireRate = 0;
     
     public Player(Keyboard input) {
 
@@ -26,10 +30,15 @@ public class Player extends Mob {
         this.y = y;
         this.input = input;
         sprite = Sprite.player_forward;
+        fireRate = WizardProjectile.FIRE_RATE;
     }
 
     @Override
     public void update() {
+
+        if (WizardProjectile.FIRE_RATE > 0) {
+            fireRate--;
+        }
 
         int xa = 0, ya= 0;
 
@@ -62,11 +71,12 @@ public class Player extends Mob {
 
     public void updateShooting() {
 
-        if (Mouse.getB() == 1) {
+        if (Mouse.getB() == 1 && fireRate <= 0) {
             double dx = Mouse.getX() - (300 * 3) / 2;
             double dy = Mouse.getY() - (168 * 3) / 2;
             double dir = Math.atan2(dy, dx);
             shoot(x, y, dir);
+            fireRate = WizardProjectile.FIRE_RATE;
         }
     }
 
