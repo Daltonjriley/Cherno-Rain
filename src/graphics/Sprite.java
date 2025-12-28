@@ -4,9 +4,9 @@ public class Sprite {
 
     public final int SIZE;
     @SuppressWarnings("FieldMayBeFinal")
-    private int x;
+    private int x, y;
     @SuppressWarnings("FieldMayBeFinal")
-    private int y;
+    private int width, height;
     public int[] pixels;
     @SuppressWarnings("FieldMayBeFinal")
     private SpriteSheet sheet;
@@ -39,9 +39,14 @@ public class Sprite {
     // Wizard Projectile Sprites
     public static Sprite wizard_projectile = new Sprite(16, 0, 0, SpriteSheet.wizard_projectile);
 
+    // Particle Sprites
+    public static Sprite particle_normal = new Sprite(3, 0xAAAAAA);
+
     public Sprite(int size, int x, int y, SpriteSheet sheet) {
 
         this.SIZE = size;
+        this.width = size;
+        this.height = size;
         this.pixels = new int[SIZE * SIZE];
         this.x = x * size;
         this.y = y * size;
@@ -49,19 +54,38 @@ public class Sprite {
         load();
     }
 
+    public Sprite(int width, int height, int color) {
+
+        SIZE = -1;
+        this.width = width;
+        this.height = height;
+        this.pixels = new int[width * height];
+        setColor(color);
+    }
+
     public Sprite(int size, int color) {
 
         this.SIZE = size;
+        this.width = size;
+        this.height = size;
         this.pixels = new int[SIZE * SIZE];
         setColor(color);
     }
 
     private void setColor(int color) {
 
-      for (int i = 0; i < SIZE*SIZE; i++){
+      for (int i = 0; i < width * height; i++){
 
         pixels[i] = color;
       }
+    }
+
+    public int getWidth() {
+        return width;
+    }
+
+    public int getHeight() {
+        return height;
     }
 
     private void load() {
