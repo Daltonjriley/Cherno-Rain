@@ -37,7 +37,7 @@ public abstract class Mob extends Entity{
 
         
         Projectile p = new WizardProjectile(x, y, dir); 
-        level.addProjectile(p);
+        level.add(p);
     }
 
     private boolean collision(int xa, int ya) {

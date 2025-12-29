@@ -1,6 +1,8 @@
 package level;
 
 import entity.Entity;
+import entity.Spawner;
+import entity.particle.Particle;
 import entity.projectile.Projectile;
 import graphics.Screen;
 import java.util.ArrayList;
@@ -18,6 +20,8 @@ public class Level {
     private List<Entity> entities = new ArrayList<>();
     @SuppressWarnings("FieldMayBeFinal")
     private List<Projectile> projectiles = new ArrayList<>();
+    @SuppressWarnings("FieldMayBeFinal")
+    private List<Particle> particles = new ArrayList<>();
 
     @SuppressWarnings("OverridableMethodCallInConstructor")
     public Level(int width, int height) {
@@ -33,6 +37,8 @@ public class Level {
 
         loadLevel(path);
         generateLevel();
+
+        add(new Spawner(16 * 16, 62 * 16, Spawner.Type.PARTICLE, 2, this));
     }
 
     protected void generateLevel() {}
@@ -47,6 +53,10 @@ public class Level {
 
         for (int i = 0; i < projectiles.size(); i++) {
             projectiles.get(i).update();
+        }
+
+        for (int i = 0; i < particles.size(); i++) {
+            particles.get(i).update();
         }
     }
 
@@ -87,17 +97,21 @@ public class Level {
         for (int i = 0; i < projectiles.size(); i++) {
             projectiles.get(i).render(screen);
         }
+
+        for (int i = 0; i < particles.size(); i++) {
+            particles.get(i).render(screen);
+        }
     }
 
     public void add(Entity e) {
-        
-        entities.add(e);
-    }
 
-    public void addProjectile(Projectile p) {
-
-        p.init(this);
-        projectiles.add(p);
+        e.init(this);
+        switch (e) {
+            case Particle particle -> particles.add(particle);
+            case Projectile projectile -> projectiles.add(projectile);
+            default -> entities.add(e);
+        }
+       
     }
 
     public Tile getTile(int x, int y) {
