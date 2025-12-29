@@ -1,6 +1,6 @@
-package entity;
+package entity.spawner;
 
-import entity.particle.Particle;
+import entity.Entity;
 import level.Level;
 
 public class Spawner extends Entity{
@@ -11,6 +11,7 @@ public class Spawner extends Entity{
         PROJECTILE;
     }
 
+    @SuppressWarnings({"FieldMayBeFinal", "unused"})
     private Type type;
     
     public Spawner(int x, int y, Type type, int amount, Level level) {
@@ -19,10 +20,5 @@ public class Spawner extends Entity{
         this.x = x;
         this.y = y;
         this.type = type;
-        for (int i = 0; i < amount; i++) {
-            if (type == Type.PARTICLE) {
-                level.add(new Particle(x, y, 50));
-            }
-        }
     }
 }

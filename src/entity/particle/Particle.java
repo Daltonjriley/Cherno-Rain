@@ -6,9 +6,12 @@ import graphics.Sprite;
 
 public class Particle extends Entity {
 
+    @SuppressWarnings("FieldMayBeFinal")
     private Sprite sprite;
 
+    @SuppressWarnings({"FieldMayBeFinal", "unused"})
     private int life;
+    private int time = 0;
 
     protected double xx, yy, xa, ya;
 
@@ -16,7 +19,7 @@ public class Particle extends Entity {
 
         this.x = x;
         this.y = y;
-        this.life = life;
+        this.life = life + random.nextInt(20) - 10;
         sprite = Sprite.particle_normal;
         this.xx = x;
         this.yy = y;
@@ -26,7 +29,9 @@ public class Particle extends Entity {
     
     @Override
     public void update() {
-
+        time++;
+        if (time > 7400) time = 0;
+        if (time >= life) remove();
         this.xx += xa;
         this.yy += ya;
     }

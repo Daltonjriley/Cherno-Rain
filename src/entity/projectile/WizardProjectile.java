@@ -1,6 +1,6 @@
 package entity.projectile;
 
-import entity.particle.Particle;
+import entity.spawner.ParticleSpawner;
 import graphics.Screen;
 import graphics.Sprite;
 
@@ -24,8 +24,7 @@ public class WizardProjectile extends Projectile {
     public void update() {
 
         if (level.tileCollision(x, y, nx, ny, 7)) {
-            Particle p = new Particle((int)x, (int)y, 10);
-            level.add(p);
+            level.add(new ParticleSpawner((int)x, (int)y, 50, 25, level));
             remove();
         } 
 
