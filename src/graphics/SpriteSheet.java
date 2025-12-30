@@ -24,6 +24,13 @@ public class SpriteSheet {
     public static SpriteSheet player_left = new SpriteSheet(SpriteSheet.player, 2, 0, 1, 3, 32);
     public static SpriteSheet player_right = new SpriteSheet(SpriteSheet.player, 3, 0, 1, 3, 32);
 
+    public static SpriteSheet dummy = new SpriteSheet("/textures/sheets/king_cherno.png", 128, 96);
+    public static SpriteSheet dummy_down = new SpriteSheet(SpriteSheet.dummy, 0, 0, 1, 3, 32);
+    public static SpriteSheet dummy_up = new SpriteSheet(SpriteSheet.dummy, 1, 0, 1, 3, 32);
+    public static SpriteSheet dummy_left = new SpriteSheet(SpriteSheet.dummy, 2, 0, 1, 3, 32);
+    public static SpriteSheet dummy_right = new SpriteSheet(SpriteSheet.dummy, 3, 0, 1, 3, 32);
+    
+
     private Sprite[] sprites;
 
     public SpriteSheet(SpriteSheet sheet, int x, int y, int width, int height, int spriteSize) {

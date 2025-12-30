@@ -42,6 +42,8 @@ public class Sprite {
     // Particle Sprites
     public static Sprite particle_normal = new Sprite(3, 0xAAAAAA);
 
+    //public static Sprite dummy = new Sprite(32, 0, 0, SpriteSheet.dummy_down);
+
     protected Sprite(SpriteSheet sheet, int width, int height) {
 
         if (width == height) SIZE = width;
