@@ -4,11 +4,10 @@ import entity.Entity;
 import entity.projectile.Projectile;
 import entity.projectile.WizardProjectile;
 import graphics.Screen;
-import graphics.Sprite;
 
 public abstract class Mob extends Entity{
 
-    protected Sprite sprite;
+    
     protected boolean moving = false;
 
     protected  enum Direction {
@@ -35,6 +34,7 @@ public abstract class Mob extends Entity{
             y += ya;
         }
     }
+    
 
     @Override
     public abstract void update();
