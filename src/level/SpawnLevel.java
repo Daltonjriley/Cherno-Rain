@@ -1,5 +1,6 @@
 package level;
 
+import entity.mob.Dummy;
 import java.io.IOException;
 
 public class SpawnLevel extends Level {
@@ -25,6 +26,7 @@ public class SpawnLevel extends Level {
             System.out.println("Could not load level file!");
             e.printStackTrace();
         }
+        add(new Dummy(20, 55));
     }
 
     @Override

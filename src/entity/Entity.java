@@ -4,7 +4,7 @@ import graphics.Screen;
 import java.util.Random;
 import level.Level;
 
-public abstract class Entity {
+public class Entity {
 
     public int x, y;
     private boolean removed = false;

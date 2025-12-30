@@ -3,6 +3,7 @@ package entity.mob;
 import entity.Entity;
 import entity.projectile.Projectile;
 import entity.projectile.WizardProjectile;
+import graphics.Screen;
 import graphics.Sprite;
 
 public abstract class Mob extends Entity{
@@ -31,7 +32,7 @@ public abstract class Mob extends Entity{
     }
 
     @Override
-    public void update() {}
+    public abstract void update();
 
     protected void shoot(int x, int y, double dir) {
 
@@ -52,6 +53,7 @@ public abstract class Mob extends Entity{
         return solid;
     }
 
-    public void render() {}
+    @Override
+    public abstract void render(Screen screen);
     
 }
