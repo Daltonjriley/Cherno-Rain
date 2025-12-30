@@ -25,8 +25,6 @@ public class AnimatedSprite extends Sprite {
             else frame++;
             sprite = sheet.getSprites()[frame];
         }
-        System.out.println("Frame: " + frame);
-        
     }
 
     public Sprite getSprite() {
@@ -35,6 +33,15 @@ public class AnimatedSprite extends Sprite {
 
     public void setFrameRate(int frames) {
         rate = frames;
+    }
+
+    public void setFrame(int frame) {
+        
+        if (frame > sheet.getSprites().length - 1) {
+            throw new IllegalArgumentException("Frame exceeds number of sprites in sheet");
+        }
+        this.frame = frame;
+        sprite = sheet.getSprites()[frame];
     }
 
 }

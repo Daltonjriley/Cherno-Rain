@@ -8,16 +8,20 @@ import graphics.Sprite;
 import graphics.SpriteSheet;
 import input.Keyboard;
 import input.Mouse;
-
+@SuppressWarnings("FieldMayBeFinal")
 public class Player extends Mob {
 
-    @SuppressWarnings("FieldMayBeFinal")
     private Keyboard input;
     private Sprite sprite;
     private int anim = 0;
     private boolean walking = false;
-    private AnimatedSprite test = new AnimatedSprite(SpriteSheet.player_down, 32, 32, 3);
+    private AnimatedSprite down = new AnimatedSprite(SpriteSheet.player_down, 32, 32, 3);
+    private AnimatedSprite up = new AnimatedSprite(SpriteSheet.player_up, 32, 32, 3);
+    private AnimatedSprite left = new AnimatedSprite(SpriteSheet.player_left, 32, 32, 3);
+    
+    private AnimatedSprite right = new AnimatedSprite(SpriteSheet.player_right, 32, 32, 3);
 
+    private AnimatedSprite animSprite = down;
     
     private int fireRate = 0;
     
@@ -39,7 +43,8 @@ public class Player extends Mob {
     @Override
     public void update() {
 
-        test.update();
+        if(walking) animSprite.update();
+        else animSprite.setFrame(0);
         if (WizardProjectile.FIRE_RATE > 0) {
             fireRate--;
         }
@@ -49,10 +54,19 @@ public class Player extends Mob {
         if (anim < 7500) anim++;
         else anim = 0;
 
-        if(input.up)    ya--;
-        if(input.down)  ya++;
-        if(input.left)  xa--;
-        if(input.right) xa++;
+        if(input.up)    {
+            ya--;
+            animSprite = up;
+        } else if(input.down)  {
+            ya++;
+            animSprite = down;
+        } else if(input.left)  {
+            xa--;
+            animSprite = left;
+        } else if(input.right) {
+            xa++;
+            animSprite = right;
+        }
 
         if (xa != 0 || ya != 0) {
             move(xa, ya);
@@ -86,7 +100,7 @@ public class Player extends Mob {
 
     @Override
     public void render(Screen screen) {
-
+/* 
         int flip = 0;
         if (dir == 0) {
             sprite = Sprite.player_forward;
@@ -132,8 +146,9 @@ public class Player extends Mob {
                     sprite = Sprite.player_side_2;
                 }
             }
-        }
-        sprite = test.getSprite();
+        }*/
+        int flip = 0;
+        sprite = animSprite.getSprite();
         screen.renderPlayer(x - 16, y - 16, sprite, flip);
 
     }
