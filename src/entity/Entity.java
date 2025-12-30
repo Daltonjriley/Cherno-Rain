@@ -7,7 +7,7 @@ import level.Level;
 
 public class Entity {
 
-    public int x, y;
+    protected int x, y;
     private boolean removed = false;
     protected Level level;
     protected final Random random = new Random();
@@ -19,6 +19,14 @@ public class Entity {
 
     public void remove() {
         removed = true;
+    }
+
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
     }
 
     public Sprite getSprite() {

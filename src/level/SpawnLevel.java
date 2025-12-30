@@ -30,7 +30,7 @@ public class SpawnLevel extends Level {
         for (int i = 0; i < 5; i++) {
             add(new Dummy(20 + i, 55));
         }
-        add(new Chaser(12, 50));
+        add(new Chaser(20, 55));
     }
 
     @Override

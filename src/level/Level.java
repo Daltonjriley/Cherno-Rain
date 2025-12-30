@@ -1,6 +1,7 @@
 package level;
 
 import entity.Entity;
+import entity.mob.Player;
 import entity.particle.Particle;
 import entity.projectile.Projectile;
 import graphics.Screen;
@@ -21,6 +22,8 @@ public class Level {
     private List<Projectile> projectiles = new ArrayList<>();
     @SuppressWarnings("FieldMayBeFinal")
     private List<Particle> particles = new ArrayList<>();
+    @SuppressWarnings("FieldMayBeFinal")
+    private List<Player> players = new ArrayList<>();
 
     @SuppressWarnings("OverridableMethodCallInConstructor")
     public Level(int width, int height) {
@@ -56,6 +59,10 @@ public class Level {
             particles.get(i).update();
         }
 
+        for (int i = 0; i < players.size(); i++) {
+            players.get(i).update();
+        }
+
         remove();
     }
 
@@ -76,6 +83,12 @@ public class Level {
         for (int i = 0; i < particles.size(); i++) {
             if (particles.get(i).isRemoved()) {
                 particles.remove(i);
+            }
+        }
+
+        for (int i = 0; i < players.size(); i++) {
+            if (players.get(i).isRemoved()) {
+                players.remove(i);
             }
         }
     }
@@ -121,6 +134,25 @@ public class Level {
         for (int i = 0; i < particles.size(); i++) {
             particles.get(i).render(screen);
         }
+
+        for (int i = 0; i < players.size(); i++) {
+            players.get(i).render(screen);
+        }
+    }
+
+    public List<Player> getPlayers() {
+
+        return players;
+    }
+
+    public Player getPlayerAt(int index) {
+
+        return players.get(index);
+    }
+
+    public Player getClientPlayer() {
+
+        return players.get(0);
     }
 
     public void add(Entity e) {
@@ -129,6 +161,7 @@ public class Level {
         switch (e) {
             case Particle particle -> particles.add(particle);
             case Projectile projectile -> projectiles.add(projectile);
+            case Player player -> players.add(player);
             default -> entities.add(e);
         }
        
