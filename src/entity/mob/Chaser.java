@@ -3,6 +3,7 @@ package entity.mob;
 import graphics.AnimatedSprite;
 import graphics.Screen;
 import graphics.SpriteSheet;
+import java.util.List;
 
 @SuppressWarnings("FieldMayBeFinal")
 public class Chaser extends Mob{
@@ -29,12 +30,15 @@ public class Chaser extends Mob{
 		xa = 0;
 		ya = 0;
 		
-		Player player = level.getClientPlayer();
-		if(x < player.getX()) xa ++;
-		if(x > player.getX()) xa --;
-		if(y < player.getY()) ya ++;
-		if(y > player.getY()) ya --;
-
+		List<Mob> players = level.getPlayers(this , 50);
+		if (!players.isEmpty()) {
+			Mob player = players.get(0);
+			if(x < player.getX()) xa ++;
+			if(x > player.getX()) xa --;
+			if(y < player.getY()) ya ++;
+			if(y > player.getY()) ya --;
+		}
+	
 		if (xa != 0 || ya != 0) {
 			move(xa, ya);
 			walking = true;
