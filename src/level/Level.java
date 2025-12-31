@@ -159,13 +159,13 @@ public class Level {
     public List<Entity> getEntities(Entity e, int radius) {
 
         List<Entity> result = new ArrayList<>();
-		int ex = e.getX();
-		int ey = e.getY();
+		int ex = (int)e.getX();
+		int ey = (int)e.getY();
 		for (int i = 0; i < entities.size(); i++) {
 			Entity entity = entities.get(i);
 			if (entity.equals(e)) continue;
-			int x = entity.getX();
-			int y = entity.getY();
+			int x = (int)entity.getX();
+			int y = (int)entity.getY();
 			int dx = Math.abs(x - ex);
 			int dy = Math.abs(y - ey);
 			double distance = Math.sqrt((dx * dx) + (dy * dy));
@@ -176,12 +176,12 @@ public class Level {
 
     public List<Mob> getPlayers(Entity e, int radius) {
 		List<Mob> result = new ArrayList<>();
-		int ex = e.getX();
-		int ey = e.getY();
+		int ex = (int)e.getX();
+		int ey = (int)e.getY();
 		for (int i = 0; i < players.size(); i++) {
 			Mob player = players.get(i);
-			int x = player.getX();
-			int y = player.getY();
+			int x = (int)player.getX();
+			int y = (int)player.getY();
 			int dx = Math.abs(x - ex);
 			int dy = Math.abs(y - ey);
 			double distance = Math.sqrt((dx * dx) + (dy * dy));

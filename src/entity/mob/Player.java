@@ -48,22 +48,24 @@ public class Player extends Mob {
             fireRate--;
         }
 
-        int xa = 0, ya= 0;
+        double xa = 0, ya= 0;
+
+        double speed = 1.2;
 
         if (anim < 7500) anim++;
         else anim = 0;
 
         if(input.up)    {
-            ya-=2;
+            ya -= speed;
             animSprite = up;
         } else if(input.down)  {
-            ya+=2;
+            ya += speed;
             animSprite = down;
         } else if(input.left)  {
-            xa-=2;
+            xa -= speed;
             animSprite = left;
         } else if(input.right) {
-            xa+=2;
+            xa += speed;
             animSprite = right;
         }
 
@@ -102,7 +104,7 @@ public class Player extends Mob {
 
         int flip = 0;
         sprite = animSprite.getSprite();
-        screen.renderPlayer(x - 16, y - 16, sprite, flip);
+        screen.renderPlayer((int)(x - 16), (int)(y - 16), sprite, flip);
 
     }
 }
