@@ -1,8 +1,6 @@
 package level;
 
-import entity.mob.Chaser;
-import entity.mob.Dummy;
-import entity.mob.Searcher;
+import entity.mob.Shooter;
 import java.io.IOException;
 
 public class SpawnLevel extends Level {
@@ -29,10 +27,11 @@ public class SpawnLevel extends Level {
             e.printStackTrace();
         }
         for (int i = 0; i < 5; i++) {
-            add(new Dummy(20 + i, 55));
+            //add(new Dummy(20 + i, 55));
         }
-        add(new Chaser(20, 55));
-        add(new Searcher(17, 30));
+        //add(new Chaser(20, 55));
+        //add(new Searcher(17, 30));
+        add(new Shooter(20, 55));
     }
 
     @Override

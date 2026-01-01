@@ -3,6 +3,7 @@ package graphics;
 import entity.mob.Chaser;
 import entity.mob.Mob;
 import entity.mob.Searcher;
+import entity.mob.Shooter;
 import entity.projectile.Projectile;
 import java.util.Random;
 import level.tile.Tile;
@@ -144,6 +145,7 @@ public class Screen {
                 int col = mob.getSprite().pixels[xs + ys * 32];
                 if ((mob instanceof Chaser) && col == 0xff472BBF) col = 0xffBA0015;
                 if ((mob instanceof Searcher) && col == 0xff472BBF) col = 0xffE8E83A;
+                if ((mob instanceof Shooter) && col == 0xff472BBF) col = 0xff000000;
                 if (col != 0xffff00ff)
                 pixels[xa + ya * width] = col;
             }
