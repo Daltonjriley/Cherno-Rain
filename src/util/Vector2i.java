@@ -15,6 +15,10 @@ public class Vector2i {
         this.x = x;
         this.y = y; 
     }
+    public Vector2i(double x, double y) {
+        this.x = (int) x;
+        this.y = (int) y; 
+    }
     public Vector2i(Vector2i other) {
         this.x = other.x;
         this.y = other.y; 
@@ -59,4 +63,10 @@ public class Vector2i {
 		if (vec.getX() == this.getX() && vec.getY() == this.getY()) return true;
 		return false;
 	}
+
+    public static double getDistance(Vector2i v0, Vector2i other) {
+        int dx = v0.x - other.x;
+        int dy = v0.y - other.y;
+        return Math.sqrt(dx * dx + dy * dy);
+    }
 }

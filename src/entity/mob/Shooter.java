@@ -1,8 +1,11 @@
 package entity.mob;
 
+import entity.Entity;
 import graphics.AnimatedSprite;
 import graphics.Screen;
 import graphics.SpriteSheet;
+import java.util.List;
+import util.Vector2i;
 
 @SuppressWarnings("FieldMayBeFinal")
 public class Shooter extends Mob{
@@ -18,6 +21,7 @@ public class Shooter extends Mob{
 	private int xa = 0;
 	private int ya = 0;
     private boolean walking = false;
+	private Entity rand = null;
 
     public Shooter(int x, int y) {
         this.x = x << 4;
@@ -26,9 +30,8 @@ public class Shooter extends Mob{
     }
 
     @Override
-    public void update() {
-
-        time++;
+   public void update() {
+		time++;
 		if (time % (random.nextInt(50) + 30) == 0) {
 			xa = random.nextInt(3) - 1;
 			ya = random.nextInt(3) - 1;
@@ -59,13 +62,53 @@ public class Shooter extends Mob{
 		} else {
 			walking = false;
 		}
-        
-        Player player = level.getClientPlayer();
-        double dx = player.getX() - x;
-        double dy = player.getY() - y;
-        double pdir = Math.atan2(dy, dx);
-        if (time % 100 == 0) shoot(x, y, pdir);
-    }
+
+		shootRandom();
+
+	}
+
+	private void shootRandom() {
+		List<Entity> entities = level.getEntities(this, 500);
+		entities.add(level.getClientPlayer());
+		if (time % (30 + random.nextInt(91)) == 0) {
+			int index = random.nextInt(entities.size());
+			rand = entities.get(index);
+		}
+
+		if (rand != null) {
+			double dx = rand.getX() - x;
+			double dy = rand.getY() - y;
+			double dir = Math.atan2(dy, dx);
+			if (time % 60 == 0) {
+				shoot(x,  y, dir);
+			}
+		}
+	}
+
+	private void shootClosest() {
+		List<Entity> entities = level.getEntities(this, 500);
+		entities.add(level.getClientPlayer());
+
+		double min = 0;
+		Entity closest = null;
+		for (int i = 0; i < entities.size(); i++) {
+			Entity e = entities.get(i);
+			double distance = Vector2i.getDistance((new Vector2i((int)x, (int)y)), new Vector2i(e.getX(), e.getY()));
+			if (i == 0 || distance < min) {
+				min = distance;
+				closest = e;
+			}
+		}
+
+		if (closest != null) {
+			double dx = closest.getX() - x;
+			double dy = closest.getY() - y;
+			double dir = Math.atan2(dy, dx);
+			if (time % 60 == 0) {
+				shoot(x,  y, dir);
+			}
+		}
+	}
 
     @Override
     public void render(Screen screen) {
