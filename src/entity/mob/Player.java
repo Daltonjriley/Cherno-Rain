@@ -50,7 +50,7 @@ public class Player extends Mob {
 
         double xa = 0, ya= 0;
 
-        double speed = 1.2;
+        double speed = 1.4;
 
         if (anim < 7500) anim++;
         else anim = 0;

@@ -2,6 +2,7 @@ package graphics;
 
 import entity.mob.Chaser;
 import entity.mob.Mob;
+import entity.mob.Searcher;
 import entity.projectile.Projectile;
 import java.util.Random;
 import level.tile.Tile;
@@ -142,6 +143,7 @@ public class Screen {
                 if (xa < 0) xa = 0;
                 int col = mob.getSprite().pixels[xs + ys * 32];
                 if ((mob instanceof Chaser) && col == 0xff472BBF) col = 0xffBA0015;
+                if ((mob instanceof Searcher) && col == 0xff472BBF) col = 0xffE8E83A;
                 if (col != 0xffff00ff)
                 pixels[xa + ya * width] = col;
             }

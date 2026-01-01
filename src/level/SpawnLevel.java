@@ -2,6 +2,7 @@ package level;
 
 import entity.mob.Chaser;
 import entity.mob.Dummy;
+import entity.mob.Searcher;
 import java.io.IOException;
 
 public class SpawnLevel extends Level {
@@ -31,6 +32,7 @@ public class SpawnLevel extends Level {
             add(new Dummy(20 + i, 55));
         }
         add(new Chaser(20, 55));
+        add(new Searcher(17, 30));
     }
 
     @Override
