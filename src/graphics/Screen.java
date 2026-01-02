@@ -125,8 +125,6 @@ public class Screen {
         }
     }
 
-    
-
     public void renderPlayer(int xp, int yp, Sprite sprite, int flip) {
 
         xp -= xOffset;
