@@ -113,6 +113,28 @@ public class Sprite {
                 pixels[xx + yy * SIZE] = sheet.pixels[(xx + this.x) + (yy + this.y) * sheet.SIZE];
             }
         }
-    }   
+    }
+    
+    public static Sprite[] split(SpriteSheet sheet) {
+        int amount = (sheet.getWidth() * sheet.getHeight()) / (sheet.SPRITE_WIDTH * sheet.SPRITE_HEIGHT);
+		Sprite[] sprites = new Sprite[amount];
+		int current = 0;
+		int[] pixels = new int[sheet.SPRITE_WIDTH * sheet.SPRITE_HEIGHT];
+		for (int yp = 0; yp < sheet.getHeight() / sheet.SPRITE_HEIGHT; yp++) {
+			for (int xp = 0; xp < sheet.getWidth() / sheet.SPRITE_WIDTH; xp++) {
+
+				for (int y = 0; y < sheet.SPRITE_HEIGHT; y++) {
+					for (int x = 0; x < sheet.SPRITE_WIDTH; x++) {
+						int xo = x + xp * sheet.SPRITE_WIDTH;
+						int yo = y + yp * sheet.SPRITE_HEIGHT;
+						pixels[x + y * sheet.SPRITE_WIDTH] = sheet.getPixels()[xo + yo * sheet.getWidth()];
+					}
+				}
+
+				sprites[current++] = new Sprite(pixels, sheet.SPRITE_WIDTH, sheet.SPRITE_HEIGHT);
+			}
+        }
+        return sprites;
+    }
     
 }

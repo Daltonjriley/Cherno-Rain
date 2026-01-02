@@ -1,4 +1,5 @@
 import entity.mob.Player;
+import graphics.Font;
 import graphics.Screen;
 import input.Keyboard;
 import input.Mouse;
@@ -178,6 +179,8 @@ public class Game extends Canvas implements Runnable {
         game.getFrame().setVisible(true);
 
         game.start();
+
+        Font font = new Font();
 
     }
 
