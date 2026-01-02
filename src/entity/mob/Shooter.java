@@ -5,6 +5,7 @@ import graphics.AnimatedSprite;
 import graphics.Screen;
 import graphics.SpriteSheet;
 import java.util.List;
+import util.Debug;
 import util.Vector2i;
 
 @SuppressWarnings("FieldMayBeFinal")
@@ -112,8 +113,8 @@ public class Shooter extends Mob{
 
     @Override
     public void render(Screen screen) {
-
         sprite = animSprite.getSprite();
+		Debug.drawRect(screen, 40, 40, 100, 40, false);
         screen.renderMob((int)(x - 16), (int)(y - 16), this);
     }
     
