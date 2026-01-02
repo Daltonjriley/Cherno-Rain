@@ -83,11 +83,12 @@ public class Sprite {
         setColor(color);
     }
 
-    public Sprite(int[] spritePixels, int width, int height) {
+    public Sprite(int[] pixels, int width, int height) {
         SIZE = (width == height) ? width : -1;
         this.width = width;
         this.height = height;
-        this.pixels = spritePixels;
+        this.pixels = new int[pixels.length];
+        System.arraycopy(pixels, 0, this.pixels, 0, pixels.length);
     }
 
     private void setColor(int color) {

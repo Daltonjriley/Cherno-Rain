@@ -24,6 +24,7 @@ public class Game extends Canvas implements Runnable {
 
     private Thread thread;
     private JFrame frame;
+    private Font font;
     
     public JFrame getFrame() {
         return frame;
@@ -59,6 +60,7 @@ public class Game extends Canvas implements Runnable {
         TileCoordinate playerSpawn = new TileCoordinate(19, 62);
         player = new Player(playerSpawn.getX(), playerSpawn.getY(), key);
         level.add(player);
+        font = new Font();
 
         addKeyListener(key);
 
@@ -158,6 +160,7 @@ public class Game extends Canvas implements Runnable {
         double xScroll = player.getX() - screen.width / 2;
         double yScroll = player.getY() - screen.height / 2;
         level.render((int)xScroll, (int)yScroll, screen);
+        font.render(screen);
         System.arraycopy(screen.pixels, 0, pixels, 0, pixels.length);
 
         Graphics g = bs.getDrawGraphics();
@@ -179,8 +182,6 @@ public class Game extends Canvas implements Runnable {
         game.getFrame().setVisible(true);
 
         game.start();
-
-        Font font = new Font();
 
     }
 

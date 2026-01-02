@@ -6,5 +6,9 @@ public class Font {
     private static Sprite[] characters = Sprite.split(font);
     
     public Font() {}
+
+    public void render(Screen screen) {
+        screen.renderSprite(50, 50, characters[0], false);
+    }
     
 }
