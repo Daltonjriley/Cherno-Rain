@@ -17,6 +17,10 @@ public class Font {
     public void render(Screen screen) {
         screen.renderSprite(50, 50, characters[0], false);
     }
+
+	public void render(int x, int y, String text, Screen screen) {
+		render(x, y, 0x000000, text, screen);
+	}
     
     public void render(int x, int y, int color, String text, Screen screen) {
 		render(x, y, 0, color, text, screen);

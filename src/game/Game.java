@@ -1,6 +1,8 @@
+package game;
 import entity.mob.Player;
 import graphics.Font;
 import graphics.Screen;
+import graphics.UI.UIManager;
 import input.Keyboard;
 import input.Mouse;
 import java.awt.Canvas;
@@ -25,6 +27,8 @@ public class Game extends Canvas implements Runnable {
     private Thread thread;
     private JFrame frame;
     private Font font;
+
+    private static UIManager uiManager;
     
     public JFrame getFrame() {
         return frame;
@@ -54,6 +58,7 @@ public class Game extends Canvas implements Runnable {
         setPreferredSize(size);
 
         screen = new Screen(width, height);
+        uiManager = new UIManager();
         frame = new JFrame();
         key = new Keyboard();
         level = Level.spawn;
@@ -77,6 +82,10 @@ public class Game extends Canvas implements Runnable {
     public static int getWindowHeight() {
         return height * scale;
     }
+
+    public static UIManager getUiManager() {
+        return uiManager;
+    }   
 
     public synchronized void start() {
 
@@ -142,6 +151,7 @@ public class Game extends Canvas implements Runnable {
         
         key.update();
         level.update();
+        uiManager.update();
 
     }
 
@@ -160,6 +170,7 @@ public class Game extends Canvas implements Runnable {
         double xScroll = player.getX() - screen.width / 2;
         double yScroll = player.getY() - screen.height / 2;
         level.render((int)xScroll, (int)yScroll, screen);
+        uiManager.render(screen);
         System.arraycopy(screen.pixels, 0, pixels, 0, pixels.length);
 
         Graphics g = bs.getDrawGraphics();

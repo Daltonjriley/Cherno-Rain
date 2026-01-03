@@ -3,8 +3,8 @@ package util;
 public class Vector2i {
 
     // Variables
-    private int x;
-    private int y;
+    public  int x;
+    public int y;
     
     // Constructors
     public Vector2i() {

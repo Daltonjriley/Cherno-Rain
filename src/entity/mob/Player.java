@@ -2,12 +2,18 @@ package entity.mob;
 
 import entity.projectile.Projectile;
 import entity.projectile.WizardProjectile;
+import game.Game;
 import graphics.AnimatedSprite;
 import graphics.Screen;
 import graphics.Sprite;
 import graphics.SpriteSheet;
+import graphics.UI.UILabel;
+import graphics.UI.UIManager;
+import graphics.UI.UIPanel;
 import input.Keyboard;
 import input.Mouse;
+import util.Vector2i;
+
 @SuppressWarnings("FieldMayBeFinal")
 public class Player extends Mob {
 
@@ -21,6 +27,8 @@ public class Player extends Mob {
     private AnimatedSprite right = new AnimatedSprite(SpriteSheet.player_right, 32, 32, 3);
 
     private AnimatedSprite animSprite = down;
+
+    private UIManager ui;
     
     private int fireRate = 0;
     
@@ -28,6 +36,7 @@ public class Player extends Mob {
 
         this.input = input;
         sprite = Sprite.player_forward;
+        
     }
 
     public Player(int x, int y, Keyboard input) {
@@ -37,6 +46,11 @@ public class Player extends Mob {
         this.input = input;
         sprite = Sprite.player_forward;
         fireRate = WizardProjectile.FIRE_RATE;
+
+        ui = Game.getUiManager();
+        UIPanel panel = new UIPanel(new util.Vector2i(300 - 80, 0));
+        ui.addPanel(panel);
+        panel.addComponent(new UILabel(new Vector2i(-10, 2), "Hello"));
     }
 
     @Override
